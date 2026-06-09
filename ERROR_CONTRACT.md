@@ -1,22 +1,30 @@
-# ERROR_CONTRACT.md
-## Contrato de Errores de LUNA v1.7.3
+# Contrato de Errores de LUNA V1.7.1
 
-Este documento define el comportamiento esperado ante fallos de almacenamiento.
-**Refleja la implementación actual.** Todo código nuevo debe respetarlo.
+Este documento define la taxonomía oficial de errores para LUNA. Todo código nuevo debe usar estas categorías.
 
-### 1. Taxonomía - Qué errores existen
-
+## 1. Taxonomía - Qué errores existen
 ```
-StorageError
-├── DatabaseCorruptError
 
-│   ├── DB_CORRUPTA_JSON
-
-│   └── DB_CORRUPTA_ESQUEMA
-
-└── DatabaseMissingError
-
-    └── DB_INEXISTENTE
+Errores por Naturaleza (LUNA_V1.7.1)
+├── Errores Lógicos
+│   ├── Alucinación de Datos
+│   └── Ruptura de Secuencia
+├── Errores de Seguridad
+│   ├── Fuga de Prompt
+│   └── Inyección de Contexto
+└── Errores de Sistema
+    ├── Timeout de API
+    └── Respuesta Malformada
 ```
-**Nota:** `BaseLunaError` es una abstracción planificada para V2.0. No existe en v1.7.3.
+## 2. Severidad - Qué tan grave es
+
+| Nivel | Descripción | Acción |
+| --- | --- | --- |
+| *CRÍTICO* | Riesgo de seguridad o pérdida de datos | Detener y alertar |
+| *ALTO* | Rompe funcionalidad core | Reintentar con fallback |
+| *MEDIO* | Degrada experiencia | Loggear y continuar |
+| *BAJO* | Cosmético | Solo loggear |
+
+*Nota:* Esta taxonomía reemplaza cualquier versión anterior.
+
 
